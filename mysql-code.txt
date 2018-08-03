@@ -1,0 +1,23 @@
+
+**********************************************
+**********************************************
+**********************************************
+Previously:
+We should run this command < sudo mysql -u root -p > on the linux shell
+and then we should write and enter mysql password after that we should write following this mysql code.
+Finally, is it succesfully, it's done
+**********************************************
+**********************************************
+**********************************************
+
+CREATE DATABASE gas_bottles_control;
+USE gas_bottles_conrtol;
+ 
+CREATE TABLE kg ( id INT NOT NULL AUTO_INCREMENT,
+                      date DATE NOT NULL,
+                      time TIME NOT NULL,
+                      kilo varchar(50),
+                      PRIMARY KEY ( id ));
+ 
+GRANT INSERT,SELECT ON gas_bottles_control.* TO 'raspberry'@'localhost' IDENTIFIED BY 'pi';
+FLUSH PRIVILEGES;

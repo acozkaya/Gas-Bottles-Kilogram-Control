@@ -1,0 +1,44 @@
+/* 	ali can özkaya 
+ gas bottles kilogram control
+	arduino code
+*/
+
+/*  
+Library; https://github.com/bogde/HX711
+ Arduino pin 2 -> HX711 CLK
+ pin 3 -> DAT
+ 5V -> VCC
+ GND -> GND
+*/
+
+#include "HX711.h"
+#define setting_factor -7050.0 // SparkFun_HX711_Calibration 
+#define DOUT  3
+#define CLK  2
+
+HX711 scale(DOUT, CLK);
+
+void setup() {
+  Serial.begin(9600);
+  Serial.println("HX711 ");
+  scale.set_scale(setting_factor); //SparkFun_HX711_Calibration 
+  scale.tare();	//flush and start
+  Serial.println("data :");
+}
+
+void loop() {
+  Serial.print("data: ");
+  Serial.print(scale.get_units(), 1); //return value is float
+  Serial.print(" kg"); 
+  Serial.println();
+}
+
+
+if(Serial.available())
+  {
+    char temp = Serial.read();
+    if(temp == '+' || temp == 'a')
+      setting_factor += 10;
+    else if(temp == '-' || temp == 'z')
+      setting_factor -= 10;
+  }
